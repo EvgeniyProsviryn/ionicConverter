@@ -32,13 +32,48 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
-  <body ng-app="starter">
-
+  <body ng-app="converter" ng-controller="converterCtrl">
     <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+      <ion-header-bar class="bar-stable bar-positive">
+        <h1 class="title">
+          <i class="icon ion-cash"></i> 
+          Currency Converter
+        </h1>
       </ion-header-bar>
       <ion-content>
+        <div class="list">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              From
+            </div>
+            <select id="from" ng-model="baseSelect">
+              <option ng-repeat="valute in curs.Valute track by $index">{{valute.CharCode}}</option>
+            </select>
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              To
+            </div>
+            <select id="to" ng-model="convertSelect">
+              <option ng-repeat="valute in curs.Valute track by $index">{{valute.CharCode}}</option>
+            </select>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Amount:</span>
+            <input type="number" class="amount-input" ng-model="amount">
+          </label>
+        </div>
+        <button class="button icon ion-loop button-block button-balanced convert-button" ng-click="convert(amount,baseSelect,convertSelect)">
+          Convert
+        </button>
+        <div class="card">
+          <div class="item item-divider">
+            Result
+          </div>
+          <div class="item item-text-wrap">
+            {{result}} {{convertSelect}}
+          </div>
+        </div>
       </ion-content>
     </ion-pane>
   </body>
